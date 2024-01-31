@@ -1,0 +1,166 @@
+import React, { useCallback, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { Input, RTE, Select } from "../components/index";
+import { Button } from "./ui/button";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "@/config/firebase.config";
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import { useSelector } from "react-redux";
+
+const CreateBlog = ({ post }) => {
+  const user = useSelector((state) => state.user);
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    setValue,
+    control,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      title: post?.title || "",
+      slug: post?.$id || "",
+      content: post?.content || "",
+      status: post?.status || "active",
+      image: post?.image || "",
+    },
+  });
+
+  const storage = getStorage();
+
+  const submit = async (data) => {
+    if (data.image && data.image[0]) {
+      const storageRef = ref(storage, data.image[0].name);
+      const uploadTask = uploadBytesResumable(storageRef, data.image[0]);
+
+      uploadTask.on(
+        "state_changed",
+        // ...
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref)
+            .then((downloadURL) => {
+              console.log("File available at", downloadURL);
+
+              const id = `${Date.now()}`;
+              const _doc = {
+                id: id,
+                user: user.uid,
+                title: data.title,
+                slug: data.slug,
+                content: data.content,
+                status: data.status,
+                image: downloadURL,
+              };
+
+              setDoc(doc(db, "Blogs", id), _doc)
+                .then((res) => {
+                  console.log(res);
+                  reset();
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+            })
+            .catch((error) => {
+              console.log("Error getting download URL:", error);
+            });
+        }
+      );
+    } else {
+      const id = `${Date.now()}`;
+      const _doc = {
+        id: id,
+        user: user.uid,
+        title: data.title,
+        slug: data.slug,
+        content: data.content,
+        status: data.status,
+      };
+
+      setDoc(doc(db, "Blogs", id), _doc)
+        .then((res) => {
+          console.log(res);
+          reset();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  const slugTransform = useCallback((value) => {
+    if (value && typeof value === "string")
+      return value
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-zA-Z\d\s]+/g, "-")
+        .replace(/\s/g, "-");
+
+    return "";
+  }, []);
+
+  useEffect(() => {
+    const subscription = watch((value, { name }) => {
+      if (name === "title") {
+        setValue("slug", slugTransform(value.title), { shouldValidate: true });
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [watch, slugTransform, setValue]);
+
+  return (
+    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap w-full px-3 pt-5 pb-10">
+      <div className="w-full px-2">
+        <Input
+          label="Title :"
+          placeholder="Title"
+          className={`mb-4 ${errors.title ? "border-red-500" : ""}`}
+          {...register("title", { required: true })}
+        />
+        <Input
+          label="Slug :"
+          placeholder="Slug"
+          className={`mb-4 ${errors.slug ? "border-red-500" : ""}`}
+          {...register("slug", { required: true })}
+          onInput={(e) => {
+            setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
+          }}
+        />
+        <Input
+          label="Featured Image :"
+          type="file"
+          className="mb-4 md:w-1/2"
+          accept="image/png, image/jpg, image/jpeg, image/gif"
+          {...register("image")}
+        />
+        {post && (
+          <div className="w-full mb-4">
+            <img alt={post.title} className="rounded-lg" />
+          </div>
+        )}
+        <RTE
+          label="Content :"
+          name="content"
+          className={`mb-4 ${errors.content ? "border-red-500" : ""}`}
+          control={control}
+          defaultValue={getValues("content")}
+        />
+        <Select
+          options={["active", "inactive"]}
+          label="Status"
+          className="my-4 md:w-1/2"
+          {...register("status", { required: true })}
+        />
+        <Button type="submit" className="w-full">
+          {post ? "Update" : "Submit"}
+        </Button>
+      </div>
+    </form>
+  );
+};
+
+export default CreateBlog;
