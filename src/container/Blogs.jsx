@@ -46,14 +46,14 @@ const BlogCard = ({ blogs, index }) => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, delay: index * 0.2 }}
       key={index}
-      className="w-4/5 cursor-pointer md:w-[450px] h-[375px] overflow-hidden bg-secondary rounded-md p-4 flex flex-col justify-center items-center gap-4"
+      className="w-4/5 cursor-pointer md:w-[350px] h-auto overflow-hidden bg-gray-50 border border-gray-100 rounded-md p-4 flex flex-col justify-center items-center gap-4 shadow-md hover:border-gray-300 hover:shadow-lg"
     >
       <div
-        className="bg-primary w-full h-full rounded-md overflow-hidden"
+        className="bg-gray-50 w-full h-full rounded-md overflow-hidden"
         style={{ overflow: "hidden", height: "100%" }}
       >
         <Link to={`/post/${blogs.id}`}>
-          <div className="w-full bg-gray-100 rounded-xl p-4">
+          <div className="w-full rounded-xl p-4">
             <div className="w-full justify-center mb-4">
               <img
                 src={
@@ -62,10 +62,11 @@ const BlogCard = ({ blogs, index }) => {
                     : `https://placehold.jp/30/000000/ffffff/300x150.png?text=${blogs.title}`
                 }
                 alt={blogs.title}
-                className="rounded-xl"
+                className="rounded-xl border-2 border-gray-100 hover:shadow-md"
               />
             </div>
-            <h2 className="text-xl font-bold">{blogs.title}</h2>
+            <div className="border border-gray-200 relative -top-2"></div>
+            <h2 className="text-xl mx-5 text-gray-800 underline font-bold">{blogs.title}</h2>
           </div>
         </Link>
       </div>

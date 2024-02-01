@@ -6,6 +6,8 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/config/firebase.config";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { useSelector } from "react-redux";
+import { Toaster } from "@/components/ui/sonner";
+import { toast } from "sonner";
 
 const CreateBlog = ({ post }) => {
   const user = useSelector((state) => state.user);
@@ -24,7 +26,6 @@ const CreateBlog = ({ post }) => {
       title: post?.title || "",
       slug: post?.$id || "",
       content: post?.content || "",
-      status: post?.status || "active",
       image: post?.image || "",
     },
   });
@@ -51,7 +52,6 @@ const CreateBlog = ({ post }) => {
                 title: data.title,
                 slug: data.slug,
                 content: data.content,
-                status: data.status,
                 image: downloadURL,
               };
 
@@ -67,6 +67,10 @@ const CreateBlog = ({ post }) => {
             .catch((error) => {
               console.log("Error getting download URL:", error);
             });
+
+          toast("Blog has been submitted successfully!", {
+            description: new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
+          });
         }
       );
     } else {
@@ -77,7 +81,6 @@ const CreateBlog = ({ post }) => {
         title: data.title,
         slug: data.slug,
         content: data.content,
-        status: data.status,
       };
 
       setDoc(doc(db, "Blogs", id), _doc)
@@ -88,6 +91,10 @@ const CreateBlog = ({ post }) => {
         .catch((error) => {
           console.log(error);
         });
+
+      toast("Blog has been submitted successfully!", {
+        description: new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
+      });
     }
   };
 
@@ -114,6 +121,7 @@ const CreateBlog = ({ post }) => {
 
   return (
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap w-full px-3 pt-5 pb-10">
+      <Toaster />
       <div className="w-full px-2">
         <Input
           label="Title :"
@@ -142,21 +150,17 @@ const CreateBlog = ({ post }) => {
             <img alt={post.title} className="rounded-lg" />
           </div>
         )}
-        <RTE
-          label="Content :"
-          name="content"
-          className={`mb-4 ${errors.content ? "border-red-500" : ""}`}
-          control={control}
-          defaultValue={getValues("content")}
-        />
-        <Select
-          options={["active", "inactive"]}
-          label="Status"
-          className="my-4 md:w-1/2"
-          {...register("status", { required: true })}
-        />
-        <Button type="submit" className="w-full">
-          {post ? "Update" : "Submit"}
+        <div className="shadow-md">
+          <RTE
+            label="Content :"
+            name="content"
+            className={`mb-4 ${errors.content ? "border-red-500" : ""}`}
+            control={control}
+            defaultValue={getValues("content")}
+          />
+        </div>
+        <Button type="submit" className="w-full py-5 mt-8">
+          Submit
         </Button>
       </div>
     </form>

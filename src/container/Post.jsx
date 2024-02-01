@@ -31,7 +31,7 @@ const Post = () => {
   }
 
   return (
-    <div>
+    <div className="w-4/5 p-5 md:px-20 my-5 m-auto border border-gray-100 shadow-md">
       <img
         src={
           post?.image
@@ -39,10 +39,15 @@ const Post = () => {
             : `https://placehold.jp/30/000000/ffffff/300x150.png?text=${post?.title}`
         }
         alt=""
+        className="m-auto"
       />
-      <h2>{post?.title}</h2>
+      {/* <div className="border border-gray-200 mt-5"></div> */}
+      <h2 className="py-3 font-bold text-2xl underline">{post?.title}</h2>
+      {/* <div className="border border-gray-200 mb-3"></div> */}
       <div>{typeof post?.content === "string" ? parse(post?.content) : ""}</div>
-      <div>Author - {typeof post?.user === "string" ? getUsernameFromEmail(post?.user) : ""}</div>
+      <div>
+        <b>Author</b> - {typeof post?.user === "string" ? getUsernameFromEmail(post?.user) : ""}
+      </div>
     </div>
   );
 };
