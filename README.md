@@ -1,4 +1,4 @@
-#BlogChain 
+# BlogChain 
 
 - Seemless UI/UX developed using reusable components served by Shadcn.
 - It's a fullstack web application developed using React + Firebase.
