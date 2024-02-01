@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Navbar, CreateBlog, Spinner } from "../src/components/index";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import { auth, db } from "./config/firebase.config";
+import { auth, db } from "../firebase.config";
 import { SignUp, Blogs, Post, MyBlogs } from "./container";
 import { useDispatch } from "react-redux";
 import { addUser } from "./utils/userSlice";

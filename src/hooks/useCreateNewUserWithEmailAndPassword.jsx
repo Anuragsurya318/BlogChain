@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../config/firebase.config";
+import { auth } from "../../firebase.config";
 import { useState } from "react";
 
 export const useCreateNewUserWithEmailAndPassword = (email, password, getEmailValidationStatus) => {

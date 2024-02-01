@@ -1,4 +1,4 @@
-import { db } from "@/config/firebase.config";
+import { db } from "../../firebase.config";
 import { collection, onSnapshot, query, where, deleteDoc, doc } from "firebase/firestore";
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";

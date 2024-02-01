@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../config/firebase.config";
+import { auth } from "../../firebase.config";
 
 export const useLoginWithEmailAndPassword = (email, password, getEmailValidationStatus) => {
   const [alert, setAlert] = useState(false);

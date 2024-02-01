@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Input, RTE, Select } from "../components/index";
 import { Button } from "./ui/button";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "@/config/firebase.config";
+import { db } from "../../firebase.config";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { useSelector } from "react-redux";
 import { Toaster } from "@/components/ui/sonner";
