@@ -8,9 +8,11 @@ import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/
 import { useSelector } from "react-redux";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const CreateBlog = ({ post }) => {
   const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -96,6 +98,10 @@ const CreateBlog = ({ post }) => {
         description: new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
       });
     }
+
+    setTimeout(() => {
+      navigate("/home");
+    }, 3000);
   };
 
   const slugTransform = useCallback((value) => {
