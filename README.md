@@ -1,12 +1,7 @@
-# React + Vite
+#BlogChain 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Seemless UI/UX developed using reusable components served by Shadcn.
+- It's a fullstack web application developed using React + Firebase.
+- A user can signIn, signUp into this web app and can write blogs on any topic.
+- Blogs written by users will then be available for other users to read.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-1. #222831
-2. #393E46
-3. #EEEEEE
