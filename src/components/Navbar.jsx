@@ -31,19 +31,17 @@ const Navbar = () => {
           <SheetContent>
             <SheetHeader>
               <img src={logo} alt="logo" className="w-36 m-auto" />
-
-              <Link to={user ? "/createBlog" : "/home/auth"} onClick={handleCreateBlogClick}>
-                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                  <SheetPrimitive.Close className="w-24 border-b-2 pb-1 mb-3 flex m-auto gap-3 justify-center">
-                    Create Blog
-                  </SheetPrimitive.Close>
-                </motion.div>
-              </Link>
-
               <Link to={"/home"}>
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                   <SheetPrimitive.Close className="w-24 border-b-2 pb-1 m-auto flex justify-center gap-3 items-center">
                     <MdHome /> Home
+                  </SheetPrimitive.Close>
+                </motion.div>
+              </Link>
+              <Link to={user ? "/createBlog" : "/home/auth"} onClick={handleCreateBlogClick}>
+                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                  <SheetPrimitive.Close className="w-24 border-b-2 pb-1 mb-3 flex m-auto gap-3 justify-center">
+                    Create Blog
                   </SheetPrimitive.Close>
                 </motion.div>
               </Link>
