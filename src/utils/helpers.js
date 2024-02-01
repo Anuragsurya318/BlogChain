@@ -7,7 +7,7 @@ const googleProvider = new GoogleAuthProvider();
 export const signInWithGoogle = async () => {
   await signInWithRedirect(auth, googleProvider).then((userCredentials) => {
     window.location.reload();
-    console.log(userCredentials);
+    // console.log(userCredentials);
   });
 };
 

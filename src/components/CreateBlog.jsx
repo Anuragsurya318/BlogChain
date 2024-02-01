@@ -43,7 +43,7 @@ const CreateBlog = ({ post }) => {
         () => {
           getDownloadURL(uploadTask.snapshot.ref)
             .then((downloadURL) => {
-              console.log("File available at", downloadURL);
+              // console.log("File available at", downloadURL);
 
               const id = `${Date.now()}`;
               const _doc = {
@@ -57,15 +57,15 @@ const CreateBlog = ({ post }) => {
 
               setDoc(doc(db, "Blogs", id), _doc)
                 .then((res) => {
-                  console.log(res);
+                  // console.log(res);
                   reset();
                 })
                 .catch((error) => {
-                  console.log(error);
+                  // console.log(error);
                 });
             })
             .catch((error) => {
-              console.log("Error getting download URL:", error);
+              // console.log("Error getting download URL:", error);
             });
 
           toast("Blog has been submitted successfully!", {
@@ -85,11 +85,11 @@ const CreateBlog = ({ post }) => {
 
       setDoc(doc(db, "Blogs", id), _doc)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           reset();
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
         });
 
       toast("Blog has been submitted successfully!", {

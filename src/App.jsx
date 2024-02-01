@@ -17,12 +17,12 @@ function App() {
     const unsubscribe = auth.onAuthStateChanged((userCredentials) => {
       setIsLoading(false);
       if (userCredentials) {
-        console.log(userCredentials);
+        // console.log(userCredentials);
         navigate("/home");
         setDoc(doc(db, "users", userCredentials?.uid), userCredentials?.providerData[0]).then(
           () => {
             dispatch(addUser(userCredentials?.providerData[0]));
-            console.log("Document successfully written!");
+            // console.log("Document successfully written!");
           }
         );
       }
@@ -41,7 +41,7 @@ function App() {
     const unsubscribe = onSnapshot(blogQuery, (querySnaps) => {
       const blogList = querySnaps.docs.map((doc) => doc.data());
       dispatch(setBlogs(blogList));
-      console.log(blogList);
+      // console.log(blogList);
     });
 
     return unsubscribe;

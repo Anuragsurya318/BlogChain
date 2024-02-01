@@ -14,16 +14,16 @@ const Post = () => {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
+        // console.log("Document data:", docSnap.data());
         setPost(docSnap.data());
       } else {
-        console.log("No such document!");
+        // console.log("No such document!");
       }
     };
 
     fetchData();
   }, [slug]);
-  console.log(slug);
+  // console.log(slug);
 
   function getUsernameFromEmail(email) {
     const parts = email.split("@");

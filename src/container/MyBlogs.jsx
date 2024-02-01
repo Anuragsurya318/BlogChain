@@ -16,7 +16,7 @@ const myBlogs = () => {
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const blogs = [];
       querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
+        // console.log(doc.id, " => ", doc.data());
         blogs.push({ ...doc.data(), id: doc.id }); // also include the document ID
       });
 
@@ -43,9 +43,9 @@ const BlogCard = ({ blogs, index }) => {
 
     try {
       await deleteDoc(blogRef);
-      console.log(`Blog with ID ${id} has been deleted.`);
+      // console.log(`Blog with ID ${id} has been deleted.`);
     } catch (error) {
-      console.error("Error deleting blog: ", error);
+      // console.error("Error deleting blog: ", error);
     }
   };
 
