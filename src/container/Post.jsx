@@ -15,7 +15,7 @@ const Post = () => {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
+        // console.log("Document data:", docSnap.data());
         setPost(docSnap.data());
       } else {
         // console.log("No such document!");
@@ -79,7 +79,7 @@ const Post = () => {
         srcDoc={newPost}
         className="w-full h-96 border border-gray-100 shadow-md"
       />
-      {console.log(newPost)}
+      {/* {console.log(newPost)} */}
       <div>
         <b>Author</b> - {typeof post?.user === "string" ? getUsernameFromEmail(post?.user) : ""}
       </div>

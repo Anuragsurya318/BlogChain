@@ -11,11 +11,11 @@ export const useLoginWithEmailAndPassword = (email, password, getEmailValidation
       await signInWithEmailAndPassword(auth, email, password)
         .then((userCredentials) => {
           if (userCredentials) {
-            console.log(userCredentials);
+            // console.log(userCredentials);
           }
         })
         .catch((error) => {
-          console.log(error.message);
+          // console.log(error.message);
           if (error.code === "auth/user-not-found") {
             setAlert(true);
             setAlertMessage("Invalid Id : User Not Found");

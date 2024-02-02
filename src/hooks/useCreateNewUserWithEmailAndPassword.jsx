@@ -10,10 +10,10 @@ export const useCreateNewUserWithEmailAndPassword = (email, password, getEmailVa
       try {
         const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
         if (userCredentials) {
-          console.log(userCredentials);
+          // console.log(userCredentials);
         }
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         if (err.code === "auth/missing-password") {
           //   setAlert(true);
           //   setAlertMessage("Please enter your password");
