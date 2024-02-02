@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import parse from "html-react-parser";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase.config";
 
 const Post = () => {
   const [post, setPost] = useState(null);
+  const [newPost, setNewPost] = useState(null);
+  const iframeRef = useRef(null);
   const { slug } = useParams();
 
   useEffect(() => {
@@ -14,7 +15,7 @@ const Post = () => {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        // console.log("Document data:", docSnap.data());
+        console.log("Document data:", docSnap.data());
         setPost(docSnap.data());
       } else {
         // console.log("No such document!");
@@ -23,7 +24,37 @@ const Post = () => {
 
     fetchData();
   }, [slug]);
-  // console.log(slug);
+
+  useEffect(() => {
+    const handleResize = (event) => {
+      if (event.data?.frameHeight) {
+        iframeRef.current.style.height = `${event.data.frameHeight}px`;
+      }
+    };
+
+    window.addEventListener("message", handleResize);
+
+    return () => {
+      window.removeEventListener("message", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    updateOutput();
+  }, [newPost, post?.content]);
+
+  const updateOutput = () => {
+    const combinedOutput = `
+    <html>
+        <head>  
+        </head> 
+        <body>
+        ${post?.content}
+        </body>
+    </html>
+    `;
+    setNewPost(combinedOutput);
+  };
 
   function getUsernameFromEmail(email) {
     const parts = email.split("@");
@@ -31,7 +62,7 @@ const Post = () => {
   }
 
   return (
-    <div className="w-4/5 p-5 md:px-20 my-5 m-auto border border-gray-100 shadow-md">
+    <div className="w-4/5 h-full p-5 md:px-20 my-5 m-auto border border-gray-100 shadow-md">
       <img
         src={
           post?.image
@@ -41,10 +72,14 @@ const Post = () => {
         alt=""
         className="m-auto"
       />
-      {/* <div className="border border-gray-200 mt-5"></div> */}
       <h2 className="py-3 font-bold text-2xl underline">{post?.title}</h2>
-      {/* <div className="border border-gray-200 mb-3"></div> */}
-      <div>{typeof post?.content === "string" ? parse(post?.content) : ""}</div>
+      <iframe
+        ref={iframeRef}
+        title="Post Content"
+        srcDoc={newPost}
+        className="w-full h-96 border border-gray-100 shadow-md"
+      />
+      {console.log(newPost)}
       <div>
         <b>Author</b> - {typeof post?.user === "string" ? getUsernameFromEmail(post?.user) : ""}
       </div>
