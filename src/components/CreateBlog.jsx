@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Input, RTE, Select } from "../components/index";
 import { Button } from "./ui/button";
@@ -11,6 +11,8 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 
 const CreateBlog = ({ post }) => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
 
@@ -35,6 +37,7 @@ const CreateBlog = ({ post }) => {
   const storage = getStorage();
 
   const submit = async (data) => {
+    setIsSubmitted(true);
     if (data.image && data.image[0]) {
       const storageRef = ref(storage, data.image[0].name);
       const uploadTask = uploadBytesResumable(storageRef, data.image[0]);
@@ -101,7 +104,7 @@ const CreateBlog = ({ post }) => {
 
     setTimeout(() => {
       navigate("/home");
-    }, 3000);
+    }, 2000);
   };
 
   const slugTransform = useCallback((value) => {
