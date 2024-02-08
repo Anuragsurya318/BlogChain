@@ -168,7 +168,7 @@ const CreateBlog = ({ post }) => {
             defaultValue={getValues("content")}
           />
         </div>
-        <Button type="submit" className="w-full py-5 mt-8">
+        <Button type="submit" disabled={isSubmitted} className="w-full py-5 mt-8">
           Submit
         </Button>
       </div>
