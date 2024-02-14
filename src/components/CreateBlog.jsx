@@ -142,6 +142,7 @@ const CreateBlog = ({ post }) => {
           label="Slug :"
           placeholder="Slug"
           className={`mb-4 ${errors.slug ? "border-red-500" : ""}`}
+          disabled={true}
           {...register("slug", { required: true })}
           onInput={(e) => {
             setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
