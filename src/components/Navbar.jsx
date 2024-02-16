@@ -31,14 +31,14 @@ const Navbar = () => {
           <SheetContent>
             <SheetHeader>
               <img src={logo} alt="logo" className="w-36 m-auto" />
-              <Link to={"/home"}>
+              <Link to={"/"}>
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                   <SheetPrimitive.Close className="w-24 border-b-2 pb-1 m-auto flex justify-center gap-3 items-center">
                     <MdHome /> Home
                   </SheetPrimitive.Close>
                 </motion.div>
               </Link>
-              <Link to={user ? "/createBlog" : "/home/auth"} onClick={handleCreateBlogClick}>
+              <Link to={user ? "/createBlog" : "/auth"} onClick={handleCreateBlogClick}>
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                   <SheetPrimitive.Close className="w-24 border-b-2 pb-1 mb-3 flex m-auto gap-3 justify-center">
                     Create Blog
@@ -55,7 +55,7 @@ const Navbar = () => {
       {user ? (
         <UserProfileDetails />
       ) : (
-        <Link to={"/home/auth"}>
+        <Link to={"/auth"}>
           <div className="bg-gray-50 rounded-sm shadow-md p-3 cursor-pointer">SignUp</div>
         </Link>
       )}

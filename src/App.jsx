@@ -11,21 +11,14 @@ import { setBlogs } from "./utils/blogSlice";
 function App() {
   const [isloading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (location.pathname === "/") {
-      navigate("/home");
-    }
-  }, [navigate, location]);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((userCredentials) => {
       setIsLoading(false);
       if (userCredentials) {
         // console.log(userCredentials);
-        navigate("/home");
+        navigate("/");
         setDoc(doc(db, "users", userCredentials?.uid), userCredentials?.providerData[0]).then(
           () => {
             dispatch(addUser(userCredentials?.providerData[0]));
@@ -64,11 +57,11 @@ function App() {
         <div>
           <Navbar />
           <Routes>
-            <Route path="/home/*" element={<Blogs />} />
+            <Route path="/*" element={<Blogs />} />
             <Route path="/createBlog/*" element={<CreateBlog />} />
-            <Route path="/home/auth" element={<SignUp />} />
+            <Route path="/auth" element={<SignUp />} />
             <Route path="/post/:slug" element={<Post />} />
-            <Route path="/home/myBlogs" element={<MyBlogs />} />
+            <Route path="/myBlogs" element={<MyBlogs />} />
 
             {/* if the route not matching */}
             {/* <Route path="*" element={<Navigate to={"/home"} />} /> */}
@@ -78,5 +71,4 @@ function App() {
     </>
   );
 }
-
 export default App;

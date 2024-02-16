@@ -18,7 +18,7 @@ export const signOutAction = async () => {
 };
 
 export const Menus = [
-  { id: uuidv4(), name: "Home", uri: "/home" },
+  { id: uuidv4(), name: "Home", uri: "/" },
   { id: uuidv4(), name: "Create Blog", uri: "/createBlog" },
-  { id: uuidv4(), name: "My Blogs", uri: "/home/myBlogs" },
+  { id: uuidv4(), name: "My Blogs", uri: "/myBlogs" },
 ];

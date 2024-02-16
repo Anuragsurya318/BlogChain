@@ -51,7 +51,7 @@ const UserProfileDetails = () => {
                   {menu.name}
                 </Link>
               ))}
-            <Link to={"/home"}>
+            <Link to={"/"}>
               <motion.p
                 onClick={signOutAction}
                 whileTap={{ scale: 0.9 }}
