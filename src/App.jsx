@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navbar, CreateBlog, Spinner } from "../src/components/index";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase.config";
 import { SignUp, Blogs, Post, MyBlogs } from "./container";
 import { useDispatch } from "react-redux";
@@ -11,7 +11,14 @@ import { setBlogs } from "./utils/blogSlice";
 function App() {
   const [isloading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      navigate("/home");
+    }
+  }, [navigate, location]);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((userCredentials) => {
