@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Input, RTE, Select } from "../components/index";
+import { Input, RTE } from "../components/index";
 import { Button } from "./ui/button";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase.config";
@@ -19,16 +19,12 @@ const CreateBlog = ({ post }) => {
   const {
     register,
     handleSubmit,
-    watch,
-    reset,
-    setValue,
     control,
     getValues,
     formState: { errors },
   } = useForm({
     defaultValues: {
       title: post?.title || "",
-      slug: post?.$id || "",
       content: post?.content || "",
       image: post?.image || "",
     },
@@ -48,29 +44,25 @@ const CreateBlog = ({ post }) => {
         () => {
           getDownloadURL(uploadTask.snapshot.ref)
             .then((downloadURL) => {
-              // console.log("File available at", downloadURL);
-
               const id = `${Date.now()}`;
               const _doc = {
                 id: id,
                 user: user.uid,
                 title: data.title,
-                slug: data.slug,
                 content: data.content,
                 image: downloadURL,
               };
 
               setDoc(doc(db, "Blogs", id), _doc)
                 .then((res) => {
-                  // console.log(res);
                   reset();
                 })
                 .catch((error) => {
-                  // console.log(error);
+                  console.log(error);
                 });
             })
             .catch((error) => {
-              // console.log("Error getting download URL:", error);
+              console.log("Error getting download URL:", error);
             });
 
           toast("Blog has been submitted successfully!", {
@@ -84,17 +76,15 @@ const CreateBlog = ({ post }) => {
         id: id,
         user: user.uid,
         title: data.title,
-        slug: data.slug,
         content: data.content,
       };
 
       setDoc(doc(db, "Blogs", id), _doc)
         .then((res) => {
-          // console.log(res);
-          reset();
+          res();
         })
         .catch((error) => {
-          // console.log(error);
+          console.log(error);
         });
 
       toast("Blog has been submitted successfully!", {
@@ -107,27 +97,6 @@ const CreateBlog = ({ post }) => {
     }, 2000);
   };
 
-  const slugTransform = useCallback((value) => {
-    if (value && typeof value === "string")
-      return value
-        .trim()
-        .toLowerCase()
-        .replace(/[^a-zA-Z\d\s]+/g, "-")
-        .replace(/\s/g, "-");
-
-    return "";
-  }, []);
-
-  useEffect(() => {
-    const subscription = watch((value, { name }) => {
-      if (name === "title") {
-        setValue("slug", slugTransform(value.title), { shouldValidate: true });
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [watch, slugTransform, setValue]);
-
   return (
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap w-full px-3 pt-5 pb-10">
       <Toaster />
@@ -137,16 +106,6 @@ const CreateBlog = ({ post }) => {
           placeholder="Title"
           className={`mb-4 ${errors.title ? "border-red-500" : ""}`}
           {...register("title", { required: true })}
-        />
-        <Input
-          label="Slug :"
-          placeholder="Slug"
-          className={`mb-4 ${errors.slug ? "border-red-500" : ""}`}
-          disabled={true}
-          {...register("slug", { required: true })}
-          onInput={(e) => {
-            setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
-          }}
         />
         <Input
           label="Featured Image :"
@@ -169,9 +128,17 @@ const CreateBlog = ({ post }) => {
             defaultValue={getValues("content")}
           />
         </div>
-        <Button type="submit" disabled={isSubmitted} className="w-full py-5 mt-8">
+        {/* <Button type="submit" disabled={isSubmitted} className="w-full py-5 mt-8">
           Submit
         </Button>
+        <button>hello</button> */}
+        <button
+          type="submit"
+          disabled={isSubmitted}
+          className="w-full mt-5 flex items-center justify-center h-9 px-4 rounded-md py-2 bg-primary text-primary-foreground shadow hover:bg-primary/90"
+        >
+          Submit
+        </button>
       </div>
     </form>
   );

@@ -64,7 +64,7 @@ function App() {
             <Route path="/home/myBlogs" element={<MyBlogs />} />
 
             {/* if the route not matching */}
-            <Route path="*" element={<Navigate to={"/home"} />} />
+            {/* <Route path="*" element={<Navigate to={"/home"} />} /> */}
           </Routes>
         </div>
       )}
