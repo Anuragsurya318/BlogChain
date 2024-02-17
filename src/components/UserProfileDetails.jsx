@@ -29,7 +29,7 @@ const UserProfileDetails = () => {
       <motion.div
         onClick={() => setIsMenu(!isMenu)}
         whileTap={{ scale: 0.9 }}
-        className="w-[46px] h-[46px] rounded-md flex items-center justify-center bg-gray-50 shadow-md cursor-pointer"
+        className="w-[46px] h-[46px] rounded-md flex items-center justify-center bg-gray-50 dark:bg-little-dark-bg dark:shadow-dark-shadow shadow-md cursor-pointer"
       >
         <FaChevronDown className="text-primaryText" />
       </motion.div>

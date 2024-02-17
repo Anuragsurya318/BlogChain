@@ -98,20 +98,25 @@ const CreateBlog = ({ post }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap w-full px-3 pt-5 pb-10">
+    <form
+      onSubmit={handleSubmit(submit)}
+      className="flex flex-wrap w-full px-3 pt-5 pb-10 dark:bg-dark-bg mt-2"
+    >
       <Toaster />
       <div className="w-full px-2">
         <Input
           label="Title :"
           placeholder="Title"
-          className={`mb-4 ${errors.title ? "border-red-500" : ""}`}
+          className={`mb-4 ${
+            errors.title ? "border-red-500" : ""
+          } dark:bg-little-dark-bg dark:shadow-dark-shadow`}
           {...register("title", { required: true })}
         />
         <Input
           label="Featured Image :"
           type="file"
-          className="mb-4 md:w-1/2"
-          accept="image/png, image/jpg, image/jpeg, image/gif"
+          className="mb-4 md:w-1/2 dark:bg-little-dark-bg dark:shadow-dark-shadow"
+          accept="image/png, image/jpg, image/jpeg, image/gif "
           {...register("image")}
         />
         {post && (

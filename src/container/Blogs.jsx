@@ -22,7 +22,7 @@ const Blogs = () => {
   }, [searchTerm]);
 
   return (
-    <div className="w-full py-6 flex items-center justify-center gap-6 flex-wrap">
+    <div className="w-full py-6 flex items-center justify-center gap-6 flex-wrap mt-2 dark:bg-black">
       {filtered ? (
         <>
           {filtered &&

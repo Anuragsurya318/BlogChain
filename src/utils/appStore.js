@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./userSlice";
 import blogReducer from "./blogSlice";
 import searchReducer from "./searchSlice";
+import themeReducer from "./themeSlice";
 
 const appStore = configureStore({
   reducer: {
@@ -9,6 +10,7 @@ const appStore = configureStore({
     user: userReducer,
     blog: blogReducer,
     search: searchReducer,
+    theme: themeReducer,
   },
 });
 

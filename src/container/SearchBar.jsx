@@ -13,7 +13,7 @@ const SearchBar = () => {
         placeholder="Search..."
         value={searchTerm}
         onChange={(e) => dispatch(setSearch(e.target.value))}
-        className="h-12 border-b-2 w-full bg-gray-50 border-b-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 rounded-sm focus:border-transparent p-2 shadow-md"
+        className="h-12 border-b-2 w-full bg-gray-50 border-b-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 rounded-sm focus:border-transparent p-2 shadow-md dark:bg-little-dark-bg dark:shadow-dark-shadow dark:border-none"
       />
     </div>
   );
