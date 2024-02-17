@@ -62,7 +62,7 @@ const Post = () => {
   }
 
   return (
-    <div className="w-4/5 h-full p-5 md:px-20 my-5 m-auto border border-gray-100 shadow-md">
+    <div className="w-4/5 h-full p-5 md:px-20 my-5 m-auto border border-gray-100 dark:bg-little-dark-bg shadow-md">
       <img
         src={
           post?.image
@@ -77,7 +77,7 @@ const Post = () => {
         ref={iframeRef}
         title="Post Content"
         srcDoc={newPost}
-        className="w-full h-96 border border-gray-100 shadow-md"
+        className="w-full h-96 border border-gray-100 dark:border-little-dark-bg shadow-md dark:invert"
       />
       {/* {console.log(newPost)} */}
       <div>

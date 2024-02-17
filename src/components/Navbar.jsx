@@ -4,7 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { SearchBar } from "../container/index";
 import logo from "../assets/logo.png";
 import darklogo from "../assets/dark-logo.png";
-import { MdHome } from "react-icons/md";
+import { MdHome, MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { UserProfileDetails } from "./index";
@@ -57,22 +57,24 @@ const Navbar = () => {
               <div>
                 <ToggleGroup type="single">
                   <ToggleGroupItem
-                    value="bold"
-                    aria-label="Toggle bold"
-                    onClick={() => {
-                      dispatch(setDark("dark"));
-                    }}
-                  >
-                    Dark
-                  </ToggleGroupItem>
-                  <ToggleGroupItem
                     value="italic"
                     aria-label="Toggle italic"
                     onClick={() => {
                       dispatch(setLight("light"));
                     }}
+                    className="dark:hover:bg-little-dark-bg dark:hover:text-dark-text"
                   >
-                    Light
+                    <MdOutlineLightMode className="text-2xl" />
+                  </ToggleGroupItem>
+                  <ToggleGroupItem
+                    value="bold"
+                    aria-label="Toggle bold"
+                    onClick={() => {
+                      dispatch(setDark("dark"));
+                    }}
+                    className="dark:hover:bg-little-dark-bg dark:hover:text-dark-text"
+                  >
+                    <MdOutlineDarkMode className="text-2xl" />
                   </ToggleGroupItem>
                 </ToggleGroup>
               </div>
@@ -87,7 +89,9 @@ const Navbar = () => {
         <UserProfileDetails />
       ) : (
         <Link to={"/auth"}>
-          <div className="bg-gray-50 rounded-sm shadow-md p-3 cursor-pointer">SignUp</div>
+          <div className="bg-gray-50 rounded-sm shadow-md p-3 dark:bg-little-dark-bg cursor-pointer">
+            SignUp
+          </div>
         </Link>
       )}
     </div>

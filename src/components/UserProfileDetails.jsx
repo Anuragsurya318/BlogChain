@@ -38,7 +38,7 @@ const UserProfileDetails = () => {
         {isMenu && (
           <motion.div
             {...SlideUpOut}
-            className="bg-secondary absolute top-16 right-0 px-4 py-3 rounded-xl shadow-md z-50 flex flex-col items-start justify-start gap-4 min-w-[225px]"
+            className="bg-secondary absolute top-16 right-0 px-4 py-3 rounded-xl shadow-md z-50 flex flex-col items-start justify-start gap-4 min-w-[225px] dark:bg-little-dark-bg"
           >
             {Menus &&
               Menus.map((menu) => (
@@ -51,12 +51,11 @@ const UserProfileDetails = () => {
                   {menu.name}
                 </Link>
               ))}
-            <Link to={"/"}>
-              <motion.p
-                onClick={signOutAction}
-                whileTap={{ scale: 0.9 }}
-                className="text-primaryText text-lg hover:bg-[rgba(256,256,256,0.05)] px-2 py-1 w-full rounded-md cursor-pointer"
-              >
+            <Link
+              to={"/"}
+              className="text-primaryText text-lg hover:bg-[rgba(256,256,256,0.05)] px-2 py-1 w-full rounded-md cursor-pointer"
+            >
+              <motion.p onClick={signOutAction} whileTap={{ scale: 0.9 }}>
                 Sign Out
               </motion.p>
             </Link>

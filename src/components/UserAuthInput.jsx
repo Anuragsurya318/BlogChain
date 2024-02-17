@@ -30,14 +30,14 @@ const UserAuthInput = ({
     <div className="flex flex-col items-start justify-start gap-1">
       <label className="text-sm text-gray-400 mt-5">{label}</label>
       <div
-        className={`flex items-center justify-center gap-3 w-full rounded-md px-4 py-1 bg-gray-100 shadow-md ${
+        className={`flex items-center justify-center gap-3 w-full rounded-md px-4 py-1 bg-gray-100 dark:bg-less-dark  shadow-md ${
           !isEmailValid && placeHolder === "Email" && value.length > 0 && "border-2 border-red-500"
         }`}
       >
-        <Icon className="text-text555" />
+        <Icon className="text-text555 dark:text-dark-text" />
         <input
           type={isPass && showPass ? "password" : "text"}
-          className="flex-1 h-full py-2 w-full bg-transparent outline-none border-none text-text555"
+          className="flex-1 h-full py-2 w-full bg-transparent outline-none border-none text-text555 dark:text-dark-text"
           placeholder={placeHolder}
           value={value}
           onChange={handleTextChange}

@@ -28,7 +28,7 @@ const myBlogs = () => {
   }, []);
 
   return (
-    <div className="w-full py-6 flex items-center justify-center gap-6 flex-wrap">
+    <div className="w-full py-6 flex justify-center h-screen gap-6 flex-wrap">
       {myBlogs &&
         myBlogs.map((myBlogs, index) => (
           <BlogCard key={myBlogs.id} blogs={myBlogs} index={index} />
@@ -57,10 +57,10 @@ const BlogCard = ({ blogs, index }) => {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5, delay: index * 0.2 }}
         key={index}
-        className="w-4/5 cursor-pointer md:w-[350px] h-auto overflow-hidden bg-gray-50 border border-gray-100 rounded-md p-4 flex flex-col justify-center items-center gap-4 shadow-md hover:border-gray-300 hover:shadow-lg"
+        className="w-4/5 cursor-pointer md:w-[350px] h-fit overflow-hidden dark:bg-little-dark-bg bg-gray-50 border border-gray-100 rounded-md p-4 flex flex-col justify-center items-center gap-4 shadow-md hover:border-gray-300 hover:shadow-lg dark:border-less-dark dark:hover:border-little-dark-bg dark:shadow-dark-shadow"
       >
         <div
-          className="bg-gray-50 w-full h-full rounded-md overflow-hidden"
+          className="bg-gray-50 w-full h-full rounded-md overflow-hidden dark:bg-little-dark-bg"
           style={{ overflow: "hidden", height: "100%" }}
         >
           <div className="w-full flex justify-end">
@@ -78,11 +78,13 @@ const BlogCard = ({ blogs, index }) => {
                       : `https://placehold.jp/30/000000/ffffff/300x150.png?text=${blogs.title}`
                   }
                   alt={blogs.title}
-                  className="rounded-xl border-2 border-gray-100 hover:shadow-md"
+                  className="rounded-xl border-2 border-gray-100 dark:border-little-dark-bg hover:shadow-md"
                 />
               </div>
-              <div className="border border-gray-200 relative -top-2"></div>
-              <h2 className="text-xl mx-5 text-gray-800 underline font-bold">{blogs.title}</h2>
+              <div className="border border-gray-200 dark:border-less-dark relative -top-2"></div>
+              <h2 className="text-xl mx-5 text-gray-800 dark:text-dark-text underline font-bold">
+                {blogs.title}
+              </h2>
             </div>
           </Link>
         </div>

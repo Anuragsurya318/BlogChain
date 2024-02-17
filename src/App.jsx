@@ -61,11 +61,11 @@ function App() {
   return (
     <>
       {isloading ? (
-        <div className="w-screen h-screen flex items-center justify-center">
+        <div className="w-screen h-screen flex items-center justify-center dark:bg-dark-bg">
           <Spinner />
         </div>
       ) : (
-        <div>
+        <div className="dark:bg-dark-bg h-full">
           <Navbar />
           <Routes>
             <Route path="/*" element={<Blogs />} />

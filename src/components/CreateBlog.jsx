@@ -55,7 +55,7 @@ const CreateBlog = ({ post }) => {
 
               setDoc(doc(db, "Blogs", id), _doc)
                 .then((res) => {
-                  reset();
+                  // console.log("Document written with ID: ", res.id);
                 })
                 .catch((error) => {
                   console.log(error);
@@ -81,7 +81,7 @@ const CreateBlog = ({ post }) => {
 
       setDoc(doc(db, "Blogs", id), _doc)
         .then((res) => {
-          res();
+          // res();
         })
         .catch((error) => {
           console.log(error);
@@ -98,32 +98,24 @@ const CreateBlog = ({ post }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(submit)}
-      className="flex flex-wrap w-full px-3 pt-5 pb-10 dark:bg-dark-bg mt-2"
-    >
+    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap w-full px-3 pt-5 pb-10">
       <Toaster />
       <div className="w-full px-2">
         <Input
           label="Title :"
           placeholder="Title"
           className={`mb-4 ${
-            errors.title ? "border-red-500" : ""
-          } dark:bg-little-dark-bg dark:shadow-dark-shadow`}
+            errors.title ? "border-red-500 dark:border-red-500" : ""
+          } dark:bg-little-dark-bg dark:border-little-dark-bg dark:text-dark-text`}
           {...register("title", { required: true })}
         />
         <Input
           label="Featured Image :"
           type="file"
-          className="mb-4 md:w-1/2 dark:bg-little-dark-bg dark:shadow-dark-shadow"
+          className="mb-4 md:w-1/2 dark:bg-little-dark-bg dark:border-none dark:text-dark-text"
           accept="image/png, image/jpg, image/jpeg, image/gif "
           {...register("image")}
         />
-        {post && (
-          <div className="w-full mb-4">
-            <img alt={post.title} className="rounded-lg" />
-          </div>
-        )}
         <div className="shadow-md">
           <RTE
             label="Content :"
@@ -133,14 +125,10 @@ const CreateBlog = ({ post }) => {
             defaultValue={getValues("content")}
           />
         </div>
-        {/* <Button type="submit" disabled={isSubmitted} className="w-full py-5 mt-8">
-          Submit
-        </Button>
-        <button>hello</button> */}
         <button
           type="submit"
           disabled={isSubmitted}
-          className="w-full mt-5 flex items-center justify-center h-9 px-4 rounded-md py-2 bg-primary text-primary-foreground shadow hover:bg-primary/90"
+          className="w-full mt-5 flex items-center justify-center h-9 px-4 rounded-md py-2 bg-primary text-primary-foreground shadow hover:bg-primary/90 dark:bg-little-dark-bg dark:text-dark-text"
         >
           Submit
         </button>

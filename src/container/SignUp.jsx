@@ -5,14 +5,17 @@ import { MdPassword } from "react-icons/md";
 import { AnimatePresence, motion } from "framer-motion";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../assets/logo.png";
+import darklogo from "../assets/dark-logo.png";
 import { useCreateNewUserWithEmailAndPassword, useLoginWithEmailAndPassword } from "../hooks/index";
 import { signInWithGoogle } from "../utils/helpers";
+import { useSelector } from "react-redux";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [getEmailValidationStatus, setGetEmailValidationStatus] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const theme = useSelector((state) => state.theme.theme);
 
   //custom hooks
   const { createNewUser } = useCreateNewUserWithEmailAndPassword(
@@ -29,8 +32,12 @@ const SignUp = () => {
 
   return (
     <div className="flex flex-col">
-      <img src={logo} alt="logo" className="w-20 md:relative md:left-16" />
-      <div className="w-11/12 md:w-3/4 m-auto py-3 bg-gray-50 shadow-md shadow-gray-300 flex flex-col items-center">
+      {theme === "light" ? (
+        <img src={logo} alt="logo" className="w-20 md:relative md:left-16" />
+      ) : (
+        <img src={darklogo} alt="dark-logo" className="w-20 md:relative md:left-16" />
+      )}
+      <div className="w-11/12 md:w-3/4 m-auto py-3 bg-gray-50 dark:bg-little-dark-bg shadow-md shadow-gray-300 flex flex-col items-center">
         <p className="">Join with Us!</p>
         <div className="w-4/5 md:w-1/2">
           {/* {/_ email _/} */}
@@ -68,7 +75,7 @@ const SignUp = () => {
             <motion.div
               whileHover={{ scale: 0.9 }}
               onClick={loginWithEmailAndPasswordHandler}
-              className="flex items-center my-2 justify-center w-full py-3 rounded-xl hover:bg-slate-800 cursor-pointer bg-slate-900  shadow-md"
+              className="flex items-center my-2 justify-center w-full py-3 rounded-xl hover:bg-slate-800 cursor-pointer bg-slate-900  shadow-md dark:bg-black"
             >
               <p className="text-xl text-white">Login</p>
             </motion.div>
@@ -76,7 +83,7 @@ const SignUp = () => {
             <motion.div
               whileHover={{ scale: 0.9 }}
               onClick={createNewUser}
-              className="flex items-center my-2 justify-center w-full py-3 rounded-xl hover:bg-slate-800 cursor-pointer bg-slate-900 shadow-md"
+              className="flex items-center my-2 justify-center w-full py-3 rounded-xl hover:bg-slate-800 cursor-pointer bg-slate-900 shadow-md dark:bg-black"
             >
               <p className="text-xl text-white">Sign Up</p>
             </motion.div>
@@ -87,7 +94,7 @@ const SignUp = () => {
               Doesn't have an account?
               <span
                 onClick={() => setIsLogin(!isLogin)}
-                className="text-gray-500 border-b border-gray-500  cursor-pointer"
+                className="text-gray-500 border-b border-gray-500 cursor-pointer"
               >
                 Create Here
               </span>
@@ -117,10 +124,10 @@ const SignUp = () => {
           <motion.div
             whileTap={{ scale: 0.9 }}
             onClick={signInWithGoogle}
-            className="flex items-center justify-center gap-3 bg-gray-100 border border-gray-200 hover:bg-gray-200 shadow-md w-full py-3 rounded-xl cursor-pointer"
+            className="flex items-center justify-center gap-3 bg-gray-100 border border-gray-200 hover:bg-gray-200 shadow-md w-full py-3 rounded-xl dark:bg-black cursor-pointer"
           >
             <FcGoogle className="text-3xl" />
-            <p className="text-xl text-black">Sign in with Google</p>
+            <p className="text-xl text-black dark:text-white ">Sign in with Google</p>
           </motion.div>
         </div>
       </div>

@@ -21,6 +21,7 @@ module.exports = {
         "dark-bg": "#000000", // dark background color
         "dark-text": "#E1E1E1",
         "little-dark-bg": "#1F1F1F",
+        "less-dark": "#4f4f4f",
         "dark-shadow": "#1F1F1F", // light text color
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
